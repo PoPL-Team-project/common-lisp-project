@@ -1,5 +1,25 @@
 (defun set-member (set item)
-  ( cond
-  ((equal set nil) nil)
-  ((equal (car set) item) t)
-  (t( set-member (cdr set)item)))) 
+  (cond
+    ((equal set nil) nil)
+    ((equal (car set) item) t)
+    (t (set-member (cdr set) item))))
+
+(defun set-union (set1 set2) nil)
+(defun set-intersection (set1 set2) nil)
+(defun set-diff (set1 set2) nil)
+(defun set-symmetric-diff (set1 set2) nil)
+(defun get-student-courses (student-id records) nil)
+(defun student-average (student-id records) nil)
+(defun common-courses (id1 id2 records) nil)
+
+(defun boolean-xor (a b) nil)
+(defun boolean-implies (a b) nil)
+(defun boolean-iff (a b) nil)
+(defun boolean-eval (expr) nil)
+(defun boolean-simplify (expr) nil)
+
+(defun list-reverse (lst) nil)
+(defun list-flatten (lst) nil)
+(defun list-remove-duplicates (lst) nil)
+(defun list-palindrome (lst) nil)
+(defun merge-sort (lst pred) nil)
