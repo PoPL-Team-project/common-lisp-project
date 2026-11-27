@@ -12,7 +12,8 @@
 (defun student-average (student-id records) nil)
 (defun common-courses (id1 id2 records) nil)
 
-(defun boolean-xor (a b) nil)
+(defun boolean-xor (a b) 
+  (not (equal a b)))
 (defun boolean-implies (a b) nil)
 (defun boolean-iff (a b) nil)
 (defun boolean-eval (expr) nil)
