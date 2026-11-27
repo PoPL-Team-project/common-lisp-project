@@ -16,7 +16,8 @@
   (not (equal a b)))
 (defun boolean-implies (a b) 
   (not (and a (not b))))
-(defun boolean-iff (a b) nil)
+(defun boolean-iff (a b) 
+  (equal a b))
 (defun boolean-eval (expr) nil)
 (defun boolean-simplify (expr) nil)
 
