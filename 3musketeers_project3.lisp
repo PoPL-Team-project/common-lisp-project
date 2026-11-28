@@ -20,7 +20,7 @@
 
 (defun boolean-iff (a b) 
   (equal a b))
-  
+
 (defun boolean-eval (exp)
   (cond ((equal exp t) t)
         ((equal exp nil) nil)
@@ -41,7 +41,46 @@
         ((equal (first exp) 'iff)
          (boolean-iff (boolean-eval (second exp))
                       (boolean-eval (third exp))))))
-(defun boolean-simplify (expr) nil)
+
+(defun simple-term-p (exp)
+  (or (equal exp t)
+      (equal exp nil)
+      (equal (list-flatten (list exp)) (list exp))))
+
+(defun simplify-not (a)
+  (cond ((and (not (simple-term-p a))
+              (equal (first a) 'not))
+         (second a))
+        (t (list 'not a))))
+
+(defun simplify-binary (op a b)
+  (cond ((equal op 'and)
+         (cond ((or (equal a nil) (equal b nil)) nil)
+               ((equal b t) a)
+               ((equal a t) b)
+               ((equal a b) a)
+               (t (list 'and a b))))
+        ((equal op 'or)
+         (cond ((or (equal a t) (equal b t)) t)
+               ((equal b nil) a)
+               ((equal a nil) b)
+               ((equal a b) a)
+               (t (list 'or a b))))
+        (t (list op a b))))
+
+(defun simplify-once (exp)
+  (cond ((simple-term-p exp) exp)
+        ((equal (first exp) 'not)
+         (simplify-not (simplify-once (second exp))))
+        (t (simplify-binary (first exp)
+                            (simplify-once (second exp))
+                            (simplify-once (third exp))))))
+
+(defun boolean-simplify (exp)
+  (let ((result (simplify-once exp)))
+    (if (equal result exp)
+        result
+        (boolean-simplify result))))
 
 (defun list-reverse-helper (lst acc)
   (cond ((equal lst nil) acc)
