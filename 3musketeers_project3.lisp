@@ -14,10 +14,13 @@
 
 (defun boolean-xor (a b) 
   (not (equal a b)))
+
 (defun boolean-implies (a b) 
   (not (and a (not b))))
+
 (defun boolean-iff (a b) 
   (equal a b))
+  
 (defun boolean-eval (exp)
   (cond ((equal exp t) t)
         ((equal exp nil) nil)
